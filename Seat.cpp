@@ -3,9 +3,14 @@
 
 using namespace std;
 struct seating{
-	char row;
-	unsigned int colomn;
+	char colomn;
+	unsigned int row;
 }place;
+
+struct seatingCapacity{
+	int rowCapacity;
+	char colomnCapacity;
+};
 
 struct seatingClass {
 	int level;
@@ -15,8 +20,14 @@ struct additionalBeverages{
 	char food;
 	char drink;
 };
+struct toWatch{
+	string movieName;
+	int score;
+	char rating;
+};
 
 seating setting(seating, seating);
+seatingCapacity setseat(seatingCapacity, seatingCapacity);
 
 int main(){
 
@@ -60,11 +71,15 @@ int main(){
 	cinemaMenu: 
 		system("CLS");
 		cout<<"\tCinema Menu"<<endl;
+		cout<<"Choose Movie Options";
 	
 	setupMenu:
 		system("CLS");
 		seating placerow, placecolomn;
-		cout<<"Seting up the program specific to your cinema"<<endl;	
+		seatingCapacity rowCarry, colomnCarry;
+		cout<<"Carry Capacity: "<<endl;
+		setseat(colomnCarry, rowCarry);
+		cout<<"Setting up the program specific to your cinema"<<endl;	
 		setting(placecolomn, placerow);
 		system("pause");
 	Docs:
@@ -76,12 +91,29 @@ int main(){
 seating setting(seating colomnf, seating rowf){
 	cout<<"Enter colomn symbol(Usually a letter): ";
 	cin>>colomnf.colomn;
+	cout<<"Colomn: "<<colomnf.colomn<<endl;
 	cout<<"Enter row number: ";
 	cin>>rowf.row;
-	cout<<colomnf.colomn<<rowf.row;
+	cout<<"row: "<<rowf.row<<endl;
+	cout<<"Seat: "<<colomnf.colomn<<rowf.row<<endl;
 	system("pause");
 }
+
+seatingCapacity setseat(seatingCapacity amountColomn, seatingCapacity amountRow){
+	cout<<"Holding capacity: "<<endl;
+	cout<<"Enter amount of row(9 max): ";
+	cin>> amountRow.rowCapacity;
+	cout<<"Enter amount of colomn(A-Z): ";
+	enum colomnSeats{A=1, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z};
+	cin>>amountColomn.colomnCapacity;
 	
+	cout<<"Total Seating Capacity: ";
+	cout<<amountRow.rowCapacity * amountColomn.colomnCapacity<<endl;
+	cout<<"Seats range from "<<"1A to "<<amountRow.rowCapacity<<amountColomn.colomnCapacity;
+	system("pause");
+	
+	
+}	
 
 
 
