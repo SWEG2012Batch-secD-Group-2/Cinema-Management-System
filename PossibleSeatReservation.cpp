@@ -14,7 +14,9 @@ void seatReservation(int a, int b, char **ptr)
 
 int main() {
 
-    char **ptr = new char *[7];
+  int i, j;
+
+  char **ptr = new char *[7];
     for(int i = 0; i<7; i++)
     {
         ptr[i] = new char[6];
@@ -25,9 +27,7 @@ int main() {
                 ptr[i][j] = 65 + j;
             }
 
-  seatReservation(0,0,ptr);
-  seatReservation(0,0,ptr);
-
+  seatReservation(i,j,ptr);
 
 
  for (int i = 0; i<7; i++)
