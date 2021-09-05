@@ -1,6 +1,6 @@
 #include<iostream>
 #include<iomanip>
-#include<windows.h>
+
 
 using namespace std;
 
@@ -96,7 +96,7 @@ int main(){
 						cout<<"VIP -- improved chairs + free meals"<<endl;
 						cout<<"Gold --- premium seating + free meals"<<endl;
 						cout<<"Normal(1), VIP(2), Gold(3)"<<endl;
-						cout<<"Prices are 100, 200 and 300 respectively"
+						cout<<"Prices are 100, 200 and 300 respectively";
 						int seats;
 						cin>>seats;
 						cout<<"Choose your Beverage: ";
@@ -105,32 +105,32 @@ int main(){
 						cout<<"choose your Beverage: "<<endl;
 						cout<<"Enter the corresponding number: ";
 						cin>>l;
-						cout<<meal[i].food<<setw(10)<<meal[i].type;
-						cout<<setw(10)<<meal[i].ingridients<<endl;
+						cout<<meal[k].food<<setw(10)<<meal[k].type;
+						cout<<setw(10)<<meal[k].ingridients<<endl;
 
 						if(seats == 1){
 							system("CLS");
-							cout"---Ticket---"<<endl;
+							cout<<"---Ticket---"<<endl;
 							cout<<"MOVIE: "<<add[j].title<<endl;
 							cout<<"CLASS: Normal"<<endl;
-							cout<<"BEVERAGE: "<<cout<<meal[i].food<,endl;
+							cout<<"BEVERAGE: "<<cout<<meal[k].food<<endl;
 							cout<<"Price: 150(including meals)"<<endl;
 						}
 						
 						else if(seats == 2){
 							system("CLS");
-							cout"---Ticket---"<<endl;
+							cout<<"---Ticket---"<<endl;
 							cout<<"MOVIE: "<<add[j].title<<endl;
 							cout<<"CLASS: VIP"<<endl;
-							cout<<"BEVERAGE: "<<cout<<meal[i].food<,endl;
+							cout<<"BEVERAGE: "<<cout<<meal[k].food<<endl;
 							cout<<"Price: 200"<<endl;
 						}
 						else if(seats == 3){
 							system("CLS");
-							cout"---Ticket---"<<endl;
+							cout<<"---Ticket---"<<endl;
 							cout<<"MOVIE: "<<add[j].title<<endl;
 							cout<<"CLASS: Gold"<<endl;
-							cout<<"BEVERAGE: "<<cout<<meal[i].food<,endl;
+							cout<<"BEVERAGE: "<<cout<<meal[k].food<<endl;
 							cout<<"Price: 300"<<endl;
 						}
 						system("PAUSE");
@@ -245,5 +245,3 @@ int main(){
 			
 		}
 	}
-	
-
