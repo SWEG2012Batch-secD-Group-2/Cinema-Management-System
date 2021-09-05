@@ -14,13 +14,13 @@ void seatReservation(int a, int b, char **ptr)
 
 int main() {
 
-    char **ptr = new char *[5];
-    for(int i = 0; i<5; i++)
+    char **ptr = new char *[7];
+    for(int i = 0; i<7; i++)
     {
-        ptr[i] = new char[4];
+        ptr[i] = new char[6];
     }
-        for (int i = 0; i<5; i++)
-            for (int j = 0; j<4; j++)
+        for (int i = 0; i<7; i++)
+            for (int j = 0; j<6; j++)
             {
                 ptr[i][j] = 65 + j;
             }
@@ -30,10 +30,10 @@ int main() {
 
 
 
- for (int i = 0; i<5; i++)
+ for (int i = 0; i<7; i++)
   {
     cout<<i+1<<" ";
-     for (int j = 0; j<4; j++)
+     for (int j = 0; j<6; j++)
       {
        cout<<ptr[i][j]<<" ";
          }
