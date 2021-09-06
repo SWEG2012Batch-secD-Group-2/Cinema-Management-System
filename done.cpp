@@ -1,4 +1,12 @@
- #include<iostream>
+/*Cinema Ticket Booking system.
+section D
+Done by Mahlet Assbu,ETS0431/12
+       Keti Yohannes,ETS0396/12
+       Kidist Tadele,Ets0403/12. */
+
+
+
+#include<iostream>
 #include<iomanip>
 #include<string>
 
