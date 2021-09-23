@@ -1,0 +1,687 @@
+
+
+/*               Cinema Managment System 
+Name                     Section            ID number
+1. Mahlet Assbu            D                ETS0431/12
+2. Keti Yohannes           D                ETS0396/12
+3. Kidist Tadele           D                ETS0403/12
+*/
+
+
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include <fstream>
+//#include <windows.h>
+
+
+using namespace std;
+
+int totalRegAmount;
+int amount;
+
+
+
+//
+// structure sector
+//
+struct movie{
+
+    string title, genre,director, playtime;
+    float rating;
+
+    }showmov[1000]= {{"Soul","Family","Pete Docter","3 AM",8.1},
+                 {"Little Women","Drama","Greta Gerwig","3 AM",7.8},
+                {"The Irishman","Crime","Martin Scorsese","4 AM",7.8},
+                     {"Cruella","Family","Craig Gillespie","5 AM",7.4},
+					 {"Black Widow","Action","Cate Shortland","5 AM",6.8},
+					 {"Luca","Adventure","Enrico Casarosa","6 AM",7.5},
+                     {"Emma","Drama","Jim O'Hanlon","6 AM",6.7},
+					 {"The White Tiger","Drama","Martin Sorensen","7 AM",7.1},
+					 {"Herself","Drama","Keanu Ferguson","9 AM",7.0},
+					 {"Annette","Musical","Lois Christenson","11 AM",6.5}};
+
+struct tickets{
+	string name;
+	char seatingclass;
+	int amountofpeople, seatingposition;
+	double price;
+};
+
+struct beverage{
+	char food[50], ingridients[100], type[10];
+	          //beverage definition at the time of declaration.
+}showmeal[1000]={{"burger","Bun,Beef,Chesse,Onion,lettuce,tomato,jal�peno","Fast food"},
+             {"Taco","Chapai,Beef,Chicken,Garlic sause,onion","Fast food"},
+			 {"Pizza","cheese,Peperroni,Beef,Olive,Tomato,onion","Fast food"},
+			 {"Shawarma","pita bread,beef/chicken,jalepeno,cream sauce","Fast food"},
+			 {"Caramel Popcorn","popcorn,caramel","snack"},
+			 {"Coca-Cola","-","Drink"},
+			 {"Fanta","-","Drink"}};
+
+                struct caddress{
+          string email;
+            int phone;
+
+           };
+
+struct cinfo{
+    string name, username, password;
+    int age;
+    caddress adinfo;
+};
+
+
+cinfo info[100];
+cinfo ccinfo[100];
+
+int regAmount;
+
+
+
+//
+// Functions start here
+//
+
+inline void showmovies(movie show[], int y);
+inline void showticket(tickets tik[], int m);
+inline void showbev(beverage order[], int z);
+inline void ticketing();
+inline int deleteBeverage(beverage order[], int z);
+void c_signup();
+void movReg();
+void showRegMov();
+inline void delMov();
+void custmenu();
+void c_accept_login();
+void a_accept_login();
+void a_mainmenu();
+void mainmenu();
+
+
+int main(){
+    
+
+    mainmenu();
+}
+
+
+//kisist 
+
+  inline void showmovies(movie show[], int y){//function to display the movie list.
+            cout<<"\t--- Available Movies ---"<<endl;
+            cout<<"Title"<<setw(10)<<"Genre"<<setw(10);
+            cout<<"Director"<<setw(10)<<"Playtime"<<setw(10)<<"Rating"<<endl;
+            for(int i=0; i<y; i++){
+                cout<<"\n"<<i+1<<". "<<(show+i)->title<<setw(10)<<(show+i)->genre;
+                cout<<"\t\t"<<(show+i)->director<<setw(10)<<(show+i)->playtime;
+                cout<<setw(10)<<(show+i)->rating<<endl;
+            }
+}
+inline void showticket(tickets tik[], int m){//function to reserve seat.
+	for (int i=0;i<m;i++){
+		system("CLS");
+		cout<<tik[i].name<<"||"<<setw(10)<<tik[i].seatingclass<<"||"<<setw(10)<<tik[i].seatingposition<<"||"<<
+		setw(10)<<tik[i].price<<endl;
+	}
+}
+inline void showbev(beverage order[], int z){//function to display the snack list
+	system("CLS");
+	cout<<"\t--- Available Beverage Items --- "<<endl;
+	cout<<"Name"<<setw(10)<<"Type"<<"\t\t\t"<<"Ingridients"<<endl;
+	for(int i=0; i<z; i++){
+		cout<<"\n"<<i+1<<". "<<order[i].food<<"||"<<setw(10)<<order[i].type<<"||";
+		cout<<"\t\t\t"<<order[i].ingridients<<endl;
+	}
+}
+void ticketing() {//a function that allows you to book a ticket according to your preferance.
+
+       tickets book[100];
+       int i;
+       int k,startNumBev = 7;
+       beverage meal[k];
+
+       cout<<"-------Tickets--------"<<endl;
+						cout<<"How many tickets do you want to buy? "<<endl;
+						int x;
+						cin>>x;
+						for (int i=0; i<x; i++){
+                        cout<<"\t\tEnter your name: "<<endl;
+                        cin.ignore();
+                        getline(cin>>ws, book[i].name);
+						cout<<"\t\tChoose a movie: "<<endl;
+
+						showmovies(showmov, 10);
+						cout<<"\t\tEnter the corresponding number for the movie: ";
+						int j;
+						cin>>j;
+
+						switch(j){
+							case 1:
+                                system("CLS");
+                                cout<<showmov[0].title<<" "<<showmov[0].genre<<" "<<showmov[0].director<<" "<<showmov[0].playtime<<" ";
+                                cout<<" "<<showmov[0].rating<<endl;
+                                break;
+						case 2:
+                                system("CLS");
+                                cout<<showmov[1].title<<" "<<showmov[1].genre<<" "<<showmov[1].director<<" "<<showmov[1].playtime<<" ";
+                                cout<<" "<<showmov[1].rating<<endl;
+                                break;
+						case 3:
+                                system("CLS");
+                                cout<<showmov[2].title<<" "<<showmov[2].genre<<" "<<showmov[2].director<<" "<<showmov[2].playtime<<" ";
+                                cout<<" "<<showmov[2].rating<<endl;
+                                break;
+						case 4:
+                                system("CLS");
+                                cout<<showmov[3].title<<" "<<showmov[3].genre<<" "<<showmov[3].director<<" "<<showmov[3].playtime<<" ";
+                                cout<<" "<<showmov[3].rating<<endl;
+						break;
+						case 5:
+                                system("CLS");
+                                cout<<showmov[4].title<<" "<<showmov[4].genre<<" "<<showmov[4].director<<" "<<showmov[4].playtime<<" ";
+                                cout<<" "<<showmov[4].rating<<endl;
+						break;
+						case 6:
+                                system("CLS");
+                                cout<<showmov[5].title<<" "<<showmov[5].genre<<" "<<showmov[5].director<<" "<<showmov[5].playtime<<" ";
+                                cout<<" "<<showmov[5].rating<<endl;
+						break;
+						case 7:
+                                system("CLS");
+                                cout<<showmov[6].title<<" "<<showmov[6].genre<<" "<<showmov[6].director<<" "<<showmov[6].playtime<<" ";
+                                cout<<" "<<showmov[6].rating<<endl;
+						break;
+						case 8:
+                                system("CLS");
+                                cout<<showmov[7].title<<" "<<showmov[7].genre<<" "<<showmov[7].director<<" "<<showmov[7].playtime<<" ";
+                                cout<<" "<<showmov[7].rating<<endl;
+						break;
+						case 9:
+                                system("CLS");
+                                cout<<showmov[8].title<<" "<<showmov[8].genre<<" "<<showmov[8].director<<" "<<showmov[8].playtime<<" ";
+                                cout<<" "<<showmov[8].rating<<endl;
+						break;
+						case 10:
+                                system("CLS");
+                                cout<<showmov[9].title<<" "<<showmov[9].genre<<" "<<showmov[9].director<<" "<<showmov[9].playtime<<" ";
+                                cout<<" "<<showmov[9].rating<<endl;
+						default:
+                                cout<<"invalid choice";
+
+
+                          }
+
+                        system("CLS");
+						cout<<"\t\tChoose your seating class: "<<endl;
+						cout<<"\t\t_____________________________________"<<endl;
+						cout<<"\t\t\t[1]. Normal -- regular seating"<<endl;
+						cout<<"\t\t\t[2]. VIP -- improved chairs + free meals"<<endl;
+						cout<<"\t\t\t[3]. Gold --- premium seating + free meals"<<endl;
+
+						cout<<"\t\t\tPrices are 100, 200 and 300 respectively"<<endl;
+						int seats;
+						cin>>seats;
+
+						cout<<"\t\tChoose your Beverage: ";
+						showbev(showmeal, startNumBev);//edited
+						int l;
+						cout<<"\t\tchoose your Beverage: "<<endl;
+						cout<<"\t\tEnter the corresponding number: ";
+						cin>>l;
+						cout<<meal[l].food<<setw(10)<<meal[l].type;
+						cout<<setw(10)<<meal[l].ingridients<<endl;
+                          switch(seats){
+						case 1:
+
+							//system("clear");
+							system("CLS");
+							cout<<"\t\t\t---Ticket---"<<endl;
+							cout<<"\t\tMOVIE: "<<showmov[j-1].title<<endl;
+							cout<<"\t\tCLASS: Normal"<<endl;
+							cout<<"\t\tBEVERAGE: "<<meal[l-1].food<<endl;
+							cout<<"\t\tPrice: 150(including meals)"<<endl;
+						    cout<<"\t\t---ENJOY YOUR MOVIE!---"<<endl;
+							 system("PAUSE");
+
+
+							 break;
+
+						case 2:
+							//system("clear");
+							system("CLS");
+							cout<<"\t\t\t---Ticket---"<<endl;
+							cout<<"\t\tMOVIE: "<<showmov[j-1].title<<endl;
+							cout<<"\t\tCLASS: VIP"<<endl;
+							cout<<"\t\tBEVERAGE: "<<meal[l-1].food<<endl;
+							cout<<"\t\tPrice: 300(including meal)"<<endl;
+							cout<<"\t\t---ENJOY YOUR MOVIE!---"<<endl;
+							break;
+						system("PAUSE");
+
+
+						 case 3:
+							//system("clear");
+							system("CLS");
+							cout<<"\t\t\t---Ticket---"<<endl;
+							cout<<"\t\tMOVIE: "<<showmov[j-1].title<<endl;
+							cout<<"\t\tCLASS: Gold"<<endl;
+							cout<<"\t\tBEVERAGE: "<<meal[l-1].food<<endl;
+							cout<<"\t\tPrice: 450(including meal)"<<endl;
+							cout<<"\t\t---ENJOY YOUR MOVIE!---"<<endl;
+						system("PAUSE");
+   }
+                        }
+   }
+/*
+inline int deleteMovie(movie show[], int y){//function to delete a movie.
+	string name;
+	int i=0;
+	system("CLS");
+	cout<<"\t--- Delete Movie ---"<<endl;
+	cout<<"enter the name of the movie"<<endl;
+	cin>>name;
+	for(i=0; i<y; i++){
+		if((show+i)->title == name){
+			for(int k = i + 1 ; k<y; k++){
+				show[i] = show[k];
+			}
+			cout<<"Movie was deleted\n";
+			y--;
+			break;
+		}else{
+			continue;
+		}
+	}
+	if(i==y){
+		cout<<"Movie not found\n";
+	}
+	return y;
+} */
+
+inline int deleteBeverage(beverage order[], int z){//function to delete a snack.
+	system("CLS");
+	string name;
+	int i=0;
+	cout<<"\t--- Delete Beverage ---"<<endl;
+	cout<<"enter the name of the beverage"<<endl;
+	cin>>name;
+	for(i=0; i<z; i++){
+		if((order[i].food) == name){
+			for(int k = i + 1 ; k<z; k++){
+				order[i] = order[k];
+			}
+			cout<<"Beverage was deleted\n";
+			z--;
+			break;
+		}else{
+			continue;
+		}
+	}
+	if(i==z){
+			cout<<"Beverage not found\n";
+		}
+		return z;
+}
+
+
+
+
+void c_signup(){//the customer signup function
+
+    string username, password, name, email;
+    int age, phone;
+
+    system("CLS");
+ ofstream ofile(username + ".csv", ios::out|ios::app);
+   if (!ofile){
+       cout<<"file creation failed! ";
+   } 
+   else { 
+     
+    cout<<"\t\t\tUsername: ";
+    getline(cin>>ws, username);
+
+   ofile<<username<<endl;
+
+    cout<<"\t\t\tName: ";
+    getline(cin>>ws, name);
+    ofile<<name<<endl;
+
+    cout<<"\t\t\tAge: ";
+    cin>>age;
+    ofile<<age<<endl;
+
+    cout<<"\t\t\tPassword: ";
+    getline(cin>>ws, password);
+    ofile<<password<<endl;
+
+    cout<<"\t\t\tEmail: ";
+    getline(cin>>ws, email);
+    ofile<<email<<endl;
+
+    cout<<"\t\t\tPhone: ";
+    cin>>phone;
+    ofile<<phone<<endl;
+
+
+
+    ofile.close();
+   }
+
+
+    cout<<"\t\t---Sign up process done----\t\t"<<endl;
+    system("CLS");
+}
+//mahi
+
+
+ void movReg(){//movie adding function
+
+
+    cout<<"Amount of Movies to be registered: ";
+    cin>>regAmount;
+
+    for(int i=0; i<regAmount; i++){
+
+
+         cout<<"\t\tMovie Registration"<<endl;
+         cout<<"\t\t\tTitle: ";
+         getline(cin>>ws, showmov[i].title);
+         cout<<"\t\t\tGenre: ";
+         getline(cin>>ws, showmov[i].genre);
+          cout<<"\t\t\tDirector: ";
+         getline(cin>>ws, showmov[i].director);
+        
+         cout<<"\t\t\tPlaytime: ";
+         getline(cin>>ws, showmov[i].playtime);
+         cout<<"\t\t\tcurrent rating: ";
+         cin>>showmov[i].rating;
+
+    }
+
+    for(int i=0; i<regAmount; i++){
+        cout<<"\t\t"<<"["<<i<<"]"<<endl;
+        cout<<"\t\t\t"<<showmov[i].title<<endl;
+        cout<<"\t\t\t"<<showmov[i].genre<<endl;
+        cout<<"\t\t\t"<<showmov[i].director<<endl;
+        cout<<"\t\t\t"<<showmov[i].playtime<<endl;
+        cout<<"\t\t\t"<<showmov[i].rating<<endl;
+        cout<<"\t\t\t---------------------------"<<endl;
+        cout<<"\t\t\t---------------------------"<<endl;
+    }
+
+ totalRegAmount = regAmount;
+     }
+
+
+
+
+void showRegMov(){//a function to display the movie showtime
+
+    for(int i=0; i<totalRegAmount; i++){
+
+        cout<<"\t\t"<<"["<<i<<"]"<<endl;
+        cout<<"\t\t\t"<<showmov[i].title<<endl;
+        cout<<"\t\t\t"<<showmov[i].genre<<endl;
+        cout<<"\t\t\t"<<showmov[i].director<<endl;
+        cout<<"\t\t\t"<<showmov[i].playtime<<endl;
+        cout<<"\t\t\t---------------------------"<<endl;
+        cout<<"\t\t\t---------------------------"<<endl;
+    }
+
+
+
+};
+
+
+inline void delMov(){//a function to delete movies
+    movie show[100];
+    int y;
+	string name;
+	int i=0;
+	system("CLS");
+	cout<<"\t--- Delete Movie ---"<<endl;
+	cout<<"enter the name of the movie"<<endl;
+	cin>>name;
+	for(i=0; i<y; i++){
+		if((show+i)->title == name){
+			for(int k = i + 1 ; k<y; k++){
+				show[i] = show[k];
+			}
+			cout<<"Movie was deleted\n";
+			y--;
+			break;
+		}else{
+			continue;
+		}
+	}
+	if(i==y){
+		cout<<"Movie not found\n";
+	}
+}
+
+void custmenu(){//menu that will be displayed after a client successfully logged in 
+     int startNumBev=7;
+    int choice;
+       preview:
+    system("CLS");
+    cout<<"\t\t\t________________________"<<endl;
+    cout<<"\t\t\t[1]. Available Movies"<<endl;
+    cout<<"\t\t\t[2]. Available Snacks"<<endl;
+    cout<<"\t\t\t[3]. Watch a movie"<<endl;
+    cout<<"\t\t\t_______________________"<<endl;
+    cout<<"\t\t\t"; cin>>choice;
+
+    if (choice == 1){
+
+        system("CLS");
+        showmovies(showmov,10);
+    }
+
+    else if (choice == 2){
+        system("CLS");
+        showbev(showmeal, startNumBev);
+    }
+    else if (choice == 3){
+        system("CLS");
+        ticketing();
+    }
+    else {
+        goto preview;
+    }
+
+    }
+
+
+void c_accept_login(){//a function that allows the customer to log in when the correct username and password is entered
+    int i;
+    string un, pw;
+    cout<<"\t---Login Page---"<<endl<<endl<<endl;
+
+    cout<<"\t\tUser name: ";
+    getline(cin>>ws, info[i].username);
+    cout<<"\t\tPassword: ";
+    getline(cin>>ws, info[i].username);
+
+    ifstream read(info[i].username + ".csv", ios::in);
+    un = info[i].username;
+    getline(read, un);
+    getline(read, pw);
+
+    if (un == info[i].username && pw == info[i].password){
+
+        cout<<"In"<<endl;
+        custmenu();
+
+        system("PAUSE");
+
+    }
+    else{
+        cout<<"Wrong user name or password"<<endl;
+
+        system("PAUSE");
+
+    }
+}
+
+/*
+void ultimatemenu(){
+        system("CLS");
+        cout<<"\t\t\t_________________________"<<endl;
+        cout<<"\t\t\t1. Sign up: "<<endl;
+        cout<<"\t\t\t2. Login: "<<endl;
+        cout<<"\t\t\t_________________________"<<endl;
+        int choice;
+        cin>>choice;
+
+        if(choice == 1){
+            a_signup();
+            a_mainmenu();
+        }
+        if(choice == 2){
+            a_accept_login();
+            a_mainmenu();
+        }
+}*/
+
+
+
+void c_mainmenu() {//menu displayed for the customer
+    c_menu:
+        system("CLS");
+        cout<<"\t\t\t_________________________"<<endl;
+        cout<<"\t\t\t1. Sign up: "<<endl;
+        cout<<"\t\t\t2. Login: "<<endl;
+        cout<<"\t\t\t_________________________"<<endl;
+        int choice;
+        cin>>choice;
+
+        if(choice == 1){
+            c_signup();
+            system("PAUSE");
+            system("CLS");
+            goto c_menu;
+        }
+        else if(choice == 2){
+            c_accept_login();
+            system("PAUSE");
+            goto c_menu;
+        }
+        else if(choice == 3){
+            system("PAUSE");
+            goto c_menu;
+        }
+        else{
+            cout<<"Invalid Input"<<endl;
+            goto c_menu;
+        }
+}
+
+
+void a_accept_login(){//admin log in function
+    system("CLS");
+
+    string password;
+    cout<<"\t\t\tPassword: ";
+    cin>>password;
+    if(password == "admin123"){
+        cout<<endl<<endl;
+        cout<<"\t\t\tAccess Granted"<<endl;
+        a_mainmenu();
+
+
+    }
+    else{
+        system("CLS");
+        cout<<"Invalid Input"<<endl;
+    }
+    }
+
+void mainmenu() {//a menu displayed at the start of the program
+
+menu:
+
+    int choice;
+    cout<<"\t\t\t_________________"<<endl;
+    cout<<"\t\t\t[1]. Customer "<<endl;
+    cout<<"\t\t\t[2]. Administrator" <<endl;
+    cout<<"\t\t\t_________________"<<endl;
+    cout<<"\t\t\t"; cin>> choice;
+
+
+    if( choice == 1){
+        c_mainmenu();
+        system("PAUSE");
+        goto menu;
+
+    }
+    else if( choice == 2){
+            a_accept_login();
+            system("PAUSE");
+            goto menu;
+    }
+    else{
+
+        cout<<"Invalid Input"<<endl;
+        system("PAUSE");
+        goto menu;
+
+    }
+}
+void a_mainmenu(){//a function that contains different option for the admin
+
+    admin:
+    system("CLS");
+    int choice;
+    cout<<"\t\t\t_____________________________"<<endl;
+    cout<<"\t\t\t[1].Register a Movie"<<endl;
+    cout<<"\t\t\t[2].Delete Registered Movie"<<endl;
+    cout<<"\t\t\t[3].Main Menu"<<endl;
+    cout<<"\t\t\t_____________________________"<<endl;
+    cout<<"\t\t\t"; cin>>choice;
+
+    if(choice == 1){
+        int startNumMovie=10,n=15;
+        movie add[n];
+        cout<<"\t----- Movie Manager -----"<<endl;
+					cout<<"Amount of movies to add: ";
+					cin>>n;
+					for(int i=0; i<n; i++){
+						//system("clear");
+						system("CLS");
+						cout<<"\t--- Cinema Management system ---"<<endl;
+						cout<<"\t----- Movie Manager -----"<<endl;
+						cout<<"\t\tMovie Title: ";
+						cin.ignore();
+						getline(cin>>ws,add[i].title);
+						cout<<"\t\tGenre: ";
+						getline(cin>>ws,add[i].genre);
+						cout<<"Director/Producer: ";
+						getline(cin>>ws,add[i].director);
+						cout<<"\t\tPlaytime: ";
+						getline(cin>>ws,add[i].playtime);
+						cout<<"\t\tRating: "<<endl;
+						cout<<"\t\t\tIMDB: ";
+						cin>>add[i].rating;
+						showmov[startNumMovie] = add[i];
+						startNumMovie++;
+						;
+
+							}
+        system("CLS");
+        goto admin;}
+    else if (choice == 2) {
+        system("CLS");
+        delMov();
+    }
+    else if (choice == 3 ){
+        mainmenu();
+    }
+    else{
+        cout<<"Invalid Input "<<endl;
+        goto admin;
+    }
+}
+
+
